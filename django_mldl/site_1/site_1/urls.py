@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls), # 127.0.0.1:8000/admin/
     path('', views.index), # 127.0.0.1:8000/
     path('hello/', views.hello, name='hello_main'), # 127.0.0.1:8000/hello
+    path('lotto/', views.index, name='index')
 ]
