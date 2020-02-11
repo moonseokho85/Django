@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse # 추가됨
+from lotto.models import GuessNumbers
+from lotto.forms import PostForm
 # Create your views here.
 
 def index(request):
@@ -18,8 +20,14 @@ def index(request):
 
     templates\ member\index.html, products\index.html, history\index.html (O)
     '''
-    sample_str = "This is python variable"
-    return render(request, 'lotto/default.html', {'pass_str': sample_str})
+    lottos = GuessNumbers.objects.all()
+    return render(request, 'lotto/default.html', {'lottos': lottos})
 
 def hello(request):
     return HttpResponse("<h1 style='color:red;'>Hello, world!</h1>")
+
+from .forms import PostForm
+
+def post(request):
+    form = PostForm()
+    return render(request, "lotto/form.html", {"form": form})
