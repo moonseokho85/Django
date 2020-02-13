@@ -27,8 +27,8 @@ def detail(request, question_id):
     return render(request, 'polls/detail.html', {'question': q})
 
 def results(request, question_id):
-    response = "You're looking at the results of question {}."
-    return HttpResponse(response.format(question_id))
+    question = get_object_or_404(Question, pk=question_id) # get_list_or_404 여러개의 리스트를 뽑을 때
+    return render(request, 'polls/result.html', {'question': question})
 
 def vote(request, question_id):
 
