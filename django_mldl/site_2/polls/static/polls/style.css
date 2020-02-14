@@ -61,3 +61,19 @@ input[type=submit]{
     background-color: #f5f5f5;
     font-size: 2em;
 }
+
+label {
+    color: red !important;
+}
+
+/* input[type=radio]{
+  타입을 지정해준다.
+} */
+
+/* h2 li {
+  h2 안에 있는 li만 선택
+} */
+
+/* .navbar > li > a {
+  자손을 선택할 때 ">"를 사용
+} */
