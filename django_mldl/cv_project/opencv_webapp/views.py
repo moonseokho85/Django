@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from .forms import SimpleUploadForm
+from .forms import SimpleUploadForm, ImageUploadForm
 from django.core.files.storage import FileSystemStorage
+from django.conf import settings
 
 # Create your views here.
 def first_view(request):
@@ -23,3 +24,18 @@ def simple_upload(request):
         form = SimpleUploadForm()
         context = {'form': form}
         return render(request, 'opencv_webapp/simple_upload.html', context)
+
+def detect_face(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+
+            imageURL = settings.MEDIA_URL + form.instance.document.urls
+
+            return render(request, 'opencv_webapp/detect_face.html', {'form': form, 'post': post})
+
+    else:
+        form = ImageUploadForm()
+        return render(request, 'opencv_webapp/detect_face.html', {'form': form})
